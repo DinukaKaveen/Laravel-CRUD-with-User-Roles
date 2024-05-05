@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class OwnerMiddleware
@@ -16,7 +17,7 @@ class OwnerMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (auth()->user()->role !== "Owner") {
+        if (Auth::user()->role !== "Owner") {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
 
