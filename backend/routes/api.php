@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -19,7 +21,25 @@ Route::middleware(['auth:sanctum'])->group(function (){
 
 // Owner routes
 Route::middleware(['auth:api', 'owner'])->group(function () {
-    Route::get('/get_users', [UserController::class, 'get_users']);
+    Route::post('create_medicine', [MedicineController::class, 'create_medicine']);
+    Route::put('update_medicine', [MedicineController::class,'update_medicine']);
+    Route::delete('delete_medicine', [MedicineController::class,'delete_medicine']);
+
+    Route::post('create_customer', [CustomerController::class, 'create_customer']);
+    Route::put('update_customer', [CustomerController::class,'update_customer']);
+    Route::delete('delete_customer', [CustomerController::class,'delete_customer']);
+});
+
+// Manager routes
+Route::middleware(['auth:api', 'manager'])->group(function () {
+    Route::put('update_customer', [CustomerController::class,'update_customer']);
+    Route::delete('delete_customer', [CustomerController::class,'delete_customer']);
+});
+
+// Cashier routes
+Route::middleware(['auth:api', 'cashier'])->group(function () {
+    Route::put('update_medicine', [MedicineController::class,'update_medicine']);
+    Route::delete('delete_medicine', [MedicineController::class,'delete_medicine']);
 });
 
 //Route::get('get_users', [UserController::class, 'get_users'])->middleware(['owner']);
