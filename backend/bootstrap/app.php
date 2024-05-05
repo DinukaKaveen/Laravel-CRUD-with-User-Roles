@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Middleware\OwnerMiddleware;
+use App\Http\Middleware\ManagerMiddleware;
+use App\Http\Middleware\CashierMiddleware;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,9 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'Owner' => \App\Http\Middleware\OwnerMiddleware::class,
-            'Manager' => \App\Http\Middleware\ManagerMiddleware::class,
-            'Cashier' => \App\Http\Middleware\CashierMiddleware::class,
+            'owner' => OwnerMiddleware::class,
+            'manager' => ManagerMiddleware::class,
+            'cashier' => CashierMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

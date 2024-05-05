@@ -32,7 +32,12 @@ class AuthController extends Controller
             'role' => $request->role,
         ]);
 
-        return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User registered successfully', 
+            'user' => $user,
+            'token' => $user->createToken('API Token')->plainTextToken], 
+            201);
     }
 
     public function login(Request $request)
@@ -52,12 +57,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
 
             $user = Auth::user();
-            //$token = $user->createToken('API Token')->plainTextToken;
 
             return response()->json([
                 'message' => 'Login successful',
                 'user' => $user,
-                //'token' => $token,
+                'token' => $user->createToken('API Token')->plainTextToken,
             ], 200);
 
         } else {
@@ -68,8 +72,11 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // Revoke the current user's token
-        $request->user()->currentAccessToken()->delete();
+        $user = Auth::user();
+
+        $user->currentAccessToken()->delete();
+
+        //$request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logged out successfully'], 200);
     }
 }
