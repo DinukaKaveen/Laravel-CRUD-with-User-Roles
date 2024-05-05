@@ -43,7 +43,7 @@ class MedicineController extends Controller
         
     }
 
-    public function update_customer(Request $request, $id) {
+    public function update_medicine(Request $request, $id) {
         try {
             
             $validator = Validator::make($request->all(), [
