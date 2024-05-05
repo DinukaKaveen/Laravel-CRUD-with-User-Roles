@@ -17,7 +17,6 @@ Route::middleware(['auth:sanctum'])->group(function (){
     Route::get('logout',[AuthController::class,'logout']);
 });
 
-
 // Owner routes
 Route::middleware(['auth:api', 'owner'])->group(function () {
     Route::get('/get_users', [UserController::class, 'get_users']);
