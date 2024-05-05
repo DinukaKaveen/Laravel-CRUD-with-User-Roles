@@ -15,6 +15,9 @@ class ManagerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (auth()->user()->role !== "Manager") {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
         return $next($request);
     }
 }
