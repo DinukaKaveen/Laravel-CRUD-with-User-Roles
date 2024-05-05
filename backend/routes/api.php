@@ -22,24 +22,24 @@ Route::middleware(['auth:sanctum'])->group(function (){
 // Owner routes
 Route::middleware(['auth:api', 'owner'])->group(function () {
     Route::post('create_medicine', [MedicineController::class, 'create_medicine']);
-    Route::put('update_medicine', [MedicineController::class,'update_medicine']);
-    Route::delete('delete_medicine', [MedicineController::class,'delete_medicine']);
+    Route::put('update_medicine/{id}', [MedicineController::class,'update_medicine']);
+    Route::delete('delete_medicine/{id}', [MedicineController::class,'delete_medicine']);
 
     Route::post('create_customer', [CustomerController::class, 'create_customer']);
-    Route::put('update_customer', [CustomerController::class,'update_customer']);
-    Route::delete('delete_customer', [CustomerController::class,'delete_customer']);
+    Route::put('update_customer/{id}', [CustomerController::class,'update_customer']);
+    Route::delete('delete_customer/{id}', [CustomerController::class,'delete_customer']);
 });
 
 // Manager routes
 Route::middleware(['auth:api', 'manager'])->group(function () {
-    Route::put('update_customer', [CustomerController::class,'update_customer']);
-    Route::delete('delete_customer', [CustomerController::class,'delete_customer']);
+    Route::put('update_customer/{id}', [CustomerController::class,'update_customer']);
+    Route::delete('delete_customer/{id}', [CustomerController::class,'delete_customer']);
 });
 
 // Cashier routes
 Route::middleware(['auth:api', 'cashier'])->group(function () {
-    Route::put('update_medicine', [MedicineController::class,'update_medicine']);
-    Route::delete('delete_medicine', [MedicineController::class,'delete_medicine']);
+    Route::put('update_medicine/{id}', [MedicineController::class,'update_medicine']);
+    Route::delete('delete_medicine/{id}', [MedicineController::class,'delete_medicine']);
 });
 
 //Route::get('get_users', [UserController::class, 'get_users'])->middleware(['owner']);
