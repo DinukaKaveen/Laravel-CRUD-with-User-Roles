@@ -50,7 +50,7 @@ class AuthController extends Controller
         // Attempt to authenticate the user
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            // Authentication successful
+
             $user = Auth::user();
             $token = $user->createToken('API Token')->plainTextToken;
 
@@ -59,8 +59,8 @@ class AuthController extends Controller
                 'user' => $user,
                 'token' => $token,
             ], 200);
+            
         } else {
-            // Authentication failed
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
