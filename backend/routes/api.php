@@ -42,4 +42,4 @@ Route::middleware(['auth:api', 'cashier'])->group(function () {
     Route::delete('delete_medicine/{id}', [MedicineController::class,'delete_medicine']);
 });
 
-//Route::get('get_users', [UserController::class, 'get_users'])->middleware(['owner']);
+//Route::get('get_users', [UserController::class, 'get_users'])->middleware(['auth:api', 'owner']);
