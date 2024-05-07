@@ -16,9 +16,10 @@ class OwnerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role !== "Owner") {
-            return response()->json(['error' => 'Unauthorized'], 403);
+        if (Auth::user()->role === "Owner") {
+            return $next($request);
         }
-        return $next($request);
+        
+        return response()->json(['error' => 'Unauthorized'], 403);
     }
 }
