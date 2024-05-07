@@ -3,6 +3,7 @@
 use App\Http\Middleware\OwnerMiddleware;
 use App\Http\Middleware\ManagerMiddleware;
 use App\Http\Middleware\CashierMiddleware;
+use App\Http\Middleware\OwnerAndManagerMiddleware;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -20,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'owner' => OwnerMiddleware::class,
             'manager' => ManagerMiddleware::class,
             'cashier' => CashierMiddleware::class,
+            'OwnerAndManager' => OwnerAndManagerMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

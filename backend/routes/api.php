@@ -22,12 +22,7 @@ Route::middleware(['auth:sanctum'])->group(function (){
 // Owner routes
 Route::middleware(['auth:api', 'owner'])->group(function () {
     Route::post('create_medicine', [MedicineController::class, 'create_medicine']);
-    Route::put('update_medicine/{id}', [MedicineController::class,'update_medicine']);
-    Route::delete('delete_medicine/{id}', [MedicineController::class,'delete_medicine']);
-
     Route::post('create_customer', [CustomerController::class, 'create_customer']);
-    Route::put('update_customer/{id}', [CustomerController::class,'update_customer']);
-    Route::delete('delete_customer/{id}', [CustomerController::class,'delete_customer']);
 });
 
 // Manager routes
@@ -40,6 +35,11 @@ Route::middleware(['auth:api', 'manager'])->group(function () {
 Route::middleware(['auth:api', 'cashier'])->group(function () {
     Route::put('update_medicine/{id}', [MedicineController::class,'update_medicine']);
     Route::delete('delete_medicine/{id}', [MedicineController::class,'delete_medicine']);
+});
+
+// Owner and Manager routes
+Route::middleware(['auth:api', 'OwnerAndManager'])->group(function () {
+    Route::get('get_users', [UserController::class, 'get_users']);
 });
 
 //Route::get('get_users', [UserController::class, 'get_users'])->middleware(['auth:api', 'owner']);
